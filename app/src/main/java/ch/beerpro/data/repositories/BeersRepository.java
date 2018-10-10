@@ -44,6 +44,16 @@ public class BeersRepository {
                 FirebaseFirestore.getInstance().collection(Beer.COLLECTION).document(beerId), Beer.class);
     }
 
+    private static LiveData<List<Beer>> getBeerByCategorieName(String category) {
+        return new FirestoreQueryLiveDataArray<>(
+                FirebaseFirestore.getInstance().collection(Beer.COLLECTION).whereEqualTo(Beer.FIELD_CATEGORY, category), Beer.class);
+    }
+
+    private static LiveData<List<Beer>> getBeerByManufacturerName(String category) {
+        return new FirestoreQueryLiveDataArray<>(
+                FirebaseFirestore.getInstance().collection(Beer.COLLECTION).whereEqualTo(Beer.FIELD_MANUFACTURER, category), Beer.class);
+    }
+
     public LiveData<List<Beer>> getAllBeers() {
         return allBeers;
     }
@@ -58,6 +68,14 @@ public class BeersRepository {
 
     public LiveData<List<String>> getBeerManufacturers() {
         return map(allBeers, mapBeersToManufacturers);
+    }
+
+    public LiveData<List<Beer>> getBeerByCategory(LiveData<String> category) {
+        return switchMap(category, BeersRepository::getBeerByCategorieName);
+    }
+
+    public LiveData<List<Beer>> getBeerByManufacturer(LiveData<String> category) {
+        return switchMap(category, BeersRepository::getBeerByManufacturerName);
     }
 
 }

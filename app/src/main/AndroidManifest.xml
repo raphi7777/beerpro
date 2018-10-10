@@ -76,6 +76,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
         </activity>
+        <activity android:name=".presentation.explore.BeerActivity"></activity>
     </application>
 
 </manifest>

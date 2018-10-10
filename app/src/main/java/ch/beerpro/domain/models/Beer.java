@@ -14,6 +14,8 @@ public class Beer implements Entity, Serializable {
 
     public static final String COLLECTION = "beers";
     public static final String FIELD_NAME = "name";
+    public static final String FIELD_CATEGORY = "category";
+    public static final String FIELD_MANUFACTURER = "manufacturer";
 
     @Exclude
     private String id;
@@ -24,4 +26,13 @@ public class Beer implements Entity, Serializable {
     private float avgRating;
     private int numRatings;
 
+    @Override
+    public String getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
 }
