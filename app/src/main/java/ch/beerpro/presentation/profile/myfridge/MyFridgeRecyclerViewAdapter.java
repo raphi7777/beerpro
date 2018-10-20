@@ -1,13 +1,16 @@
-package ch.beerpro.presentation.profile.mywishlist;
+package ch.beerpro.presentation.profile.myfridge;
 
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import com.bumptech.glide.request.RequestOptions;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -16,24 +19,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.beerpro.GlideApp;
 import ch.beerpro.R;
-import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
 import ch.beerpro.domain.models.Beer;
-import ch.beerpro.domain.models.Wish;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import ch.beerpro.domain.models.FridgeItem;
+import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
 
-import java.text.DateFormat;
+public class MyFridgeRecyclerViewAdapter extends ListAdapter<Pair<FridgeItem, Beer>, MyFridgeRecyclerViewAdapter.ViewHolder> {
 
+    private static final String TAG = "FridgelistRecyclerViewAda";
+    private static final DiffUtil.ItemCallback<Pair<FridgeItem, Beer>> DIFF_CALLBACK = new EntityPairDiffItemCallback<>();
+    private final OnMyFridgeItemInteractionListener listener;
 
-public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, WishlistRecyclerViewAdapter.ViewHolder> {
-
-    private static final String TAG = "WishlistRecyclerViewAda";
-
-    private static final DiffUtil.ItemCallback<Pair<Wish, Beer>> DIFF_CALLBACK = new EntityPairDiffItemCallback<>();
-
-    private final OnWishlistItemInteractionListener listener;
-
-    public WishlistRecyclerViewAdapter(OnWishlistItemInteractionListener listener) {
+    public MyFridgeRecyclerViewAdapter(OnMyFridgeItemInteractionListener listener) {
         super(DIFF_CALLBACK);
         this.listener = listener;
     }
@@ -42,48 +38,40 @@ public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, W
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.activity_my_wishlist_listentry, parent, false);
+        View view = layoutInflater.inflate(R.layout.activity_my_fridge_listentry, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        Pair<Wish, Beer> item = getItem(position);
+        Pair<FridgeItem, Beer> item = getItem(position);
         holder.bind(item.first, item.second, listener);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.name)
         TextView name;
-
         @BindView(R.id.manufacturer)
         TextView manufacturer;
-
         @BindView(R.id.category)
         TextView category;
-
         @BindView(R.id.photo)
         ImageView photo;
-
         @BindView(R.id.ratingBar)
         RatingBar ratingBar;
-
         @BindView(R.id.numRatings)
         TextView numRatings;
-
-        @BindView(R.id.addedAt)
-        TextView addedAt;
-
-        @BindView(R.id.removeFromWishlist)
-        Button remove;
+        @BindView(R.id.menge)
+        EditText amount;
+        @BindView(R.id.save)
+        Button save;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Wish wish, Beer item, OnWishlistItemInteractionListener listener) {
+        void bind(FridgeItem fridgeItem, Beer item, OnMyFridgeItemInteractionListener listener) {
             name.setText(item.getName());
             manufacturer.setText(item.getManufacturer());
             category.setText(item.getCategory());
@@ -94,12 +82,11 @@ public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, W
             ratingBar.setRating(item.getAvgRating());
             numRatings.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getNumRatings()));
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
-
-            String formattedDate =
-                    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(wish.getAddedAt());
-            addedAt.setText(formattedDate);
-            remove.setOnClickListener(v -> listener.onWishClickedListener(item));
+            amount.setText(String.valueOf(fridgeItem.getAmount()));
+            save.setOnClickListener(v -> {
+                fridgeItem.setAmount(amount.getText().toString());
+                listener.onSaveClickedListener(fridgeItem);
+            });
         }
-
     }
 }
