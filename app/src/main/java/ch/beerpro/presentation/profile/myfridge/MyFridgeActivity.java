@@ -85,6 +85,5 @@ public class MyFridgeActivity extends AppCompatActivity implements OnMyFridgeIte
     @Override
     public void onSaveClickedListener(FridgeItem fridgeItem) {
         model.updateFridge(fridgeItem);
-        updateFridge(model.getMyFridgeWithBeers().getValue());
     }
 }
