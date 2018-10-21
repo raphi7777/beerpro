@@ -11,6 +11,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -63,6 +66,8 @@ public class MyFridgeRecyclerViewAdapter extends ListAdapter<Pair<FridgeItem, Be
         TextView numRatings;
         @BindView(R.id.menge)
         EditText amount;
+        @BindView(R.id.addedAt)
+        TextView addedAt;
         @BindView(R.id.save)
         Button save;
 
@@ -83,6 +88,10 @@ public class MyFridgeRecyclerViewAdapter extends ListAdapter<Pair<FridgeItem, Be
             numRatings.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getNumRatings()));
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
             amount.setText(String.valueOf(fridgeItem.getAmount()));
+            Locale locale = new Locale("de", "CH");
+            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y,\nHH:mm:ss", locale);
+            String formattedDate = formatter.format(fridgeItem.getAddedAt());
+            addedAt.setText(formattedDate);
             save.setOnClickListener(v -> {
                 fridgeItem.setAmount(amount.getText().toString());
                 listener.onSaveClickedListener(fridgeItem);

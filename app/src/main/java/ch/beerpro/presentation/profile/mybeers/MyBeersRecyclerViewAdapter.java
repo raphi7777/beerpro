@@ -26,6 +26,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 public class MyBeersRecyclerViewAdapter extends ListAdapter<MyBeer, MyBeersRecyclerViewAdapter.ViewHolder> {
@@ -117,8 +119,9 @@ public class MyBeersRecyclerViewAdapter extends ListAdapter<MyBeer, MyBeersRecyc
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
             removeFromWishlist.setOnClickListener(v -> listener.onWishClickedListener(item));
 
-            String formattedDate =
-                    DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT).format(entry.getDate());
+            Locale locale = new Locale("de", "CH");
+            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y, HH:mm:ss", locale);
+            String formattedDate = formatter.format(entry.getDate());
             addedAt.setText(formattedDate);
 
             if (entry instanceof MyBeerFromWishlist) {

@@ -23,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, WishlistRecyclerViewAdapter.ViewHolder> {
@@ -95,8 +97,9 @@ public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, W
             numRatings.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getNumRatings()));
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
 
-            String formattedDate =
-                    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(wish.getAddedAt());
+            Locale locale = new Locale("de", "CH");
+            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y, HH:mm:ss", locale);
+            String formattedDate = formatter.format(wish.getAddedAt());
             addedAt.setText(formattedDate);
             remove.setOnClickListener(v -> listener.onWishClickedListener(item));
         }
