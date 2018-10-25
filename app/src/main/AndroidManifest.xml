@@ -26,7 +26,15 @@
         <activity
             android:name=".presentation.MainActivity"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="beerpro.page.link/beershare" android:scheme="http"/>
+                <data android:host="beerpro.page.link/beershare" android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.explore.search.SearchActivity" />
         <activity
             android:name=".presentation.details.DetailsActivity"
