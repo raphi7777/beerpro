@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -122,6 +123,7 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     @OnClick(R.id.actionsButton)
     public void showBottomSheetDialog() {
         View view = getLayoutInflater().inflate(R.layout.single_bottom_sheet_dialog, null);
+        view.findViewById(R.id.addToFridge).setOnClickListener(this::feedback);
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
         dialog.show();
@@ -149,7 +151,13 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Beer Pro");
         sendIntent.putExtra(Intent.EXTRA_TEXT, dynamicLinkUri.toString());
         sendIntent.setType("text/plain");
-        startActivity(Intent.createChooser(sendIntent, "Share app via" ));
+        startActivity(Intent.createChooser(sendIntent, "Share app via"));
+    }
+
+    public void feedback(View v) {
+        model.addBeerToFridge(v);
+        Toast.makeText(getBaseContext(), "Wurde hinzugefügt",
+                Toast.LENGTH_LONG).show();
     }
 
     private void updateBeer(Beer item) {

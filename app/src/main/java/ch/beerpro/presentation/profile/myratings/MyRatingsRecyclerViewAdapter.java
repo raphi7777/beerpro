@@ -24,6 +24,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 
@@ -104,8 +106,10 @@ public class MyRatingsRecyclerViewAdapter
 
             ratingBar.setNumStars(5);
             ratingBar.setRating(item.getRating());
-            String formattedDate =
-                    DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT).format(item.getCreationDate());
+
+            Locale locale = new Locale("de", "CH");
+            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y, HH:mm:ss", locale);
+            String formattedDate = formatter.format(item.getCreationDate());
             date.setText(formattedDate);
 
             if (item.getPhoto() != null) {

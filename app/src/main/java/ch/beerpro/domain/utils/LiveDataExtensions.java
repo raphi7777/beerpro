@@ -59,6 +59,7 @@ public class LiveDataExtensions {
         };
     }
 
+
     public static <A, B, C> LiveData<Triple<A, B, C>> combineLatest(LiveData<A> as, LiveData<B> bs, LiveData<C> cs) {
         return new MediatorLiveData<Triple<A, B, C>>() {
 
@@ -90,4 +91,42 @@ public class LiveDataExtensions {
             }
         };
     }
+
+    public static <A, B, C, D> LiveData<Holder<A, B, C, D>> combineLatest(LiveData<A> as, LiveData<B> bs, LiveData<C> cs, LiveData<D> ds) {
+        return new MediatorLiveData<Holder<A, B, C, D>>() {
+
+            A lastA = null;
+            B lastB = null;
+            C lastC = null;
+            D lastD = null;
+            {
+                {
+                    addSource(as, (A a) -> {
+                        lastA = a;
+                        update();
+                    });
+                    addSource(bs, (B b) -> {
+                        lastB = b;
+                        update();
+                    });
+                    addSource(cs, (C c) -> {
+                        lastC = c;
+                        update();
+                    });
+                    addSource(ds, (D d) -> {
+                        lastD = d;
+                        update();
+                    });
+                }
+            }
+
+            private void update() {
+                if (lastA != null && lastB != null && lastC != null && lastD != null) {
+                    Holder<A, B, C, D> h = new Holder<>(lastA, lastB, lastC, lastD);
+                    this.setValue(h);
+                }
+            }
+        };
+    }
+
 }
