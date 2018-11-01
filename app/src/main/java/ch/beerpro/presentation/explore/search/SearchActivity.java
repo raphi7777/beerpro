@@ -9,20 +9,20 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+import com.google.common.base.Strings;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
+import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.DetailsActivity;
 import ch.beerpro.presentation.explore.search.beers.SearchResultFragment;
 import ch.beerpro.presentation.explore.search.suggestions.SearchSuggestionsFragment;
 import ch.beerpro.presentation.profile.mybeers.MyBeersViewModel;
 import ch.beerpro.presentation.profile.mybeers.OnMyBeerItemInteractionListener;
-import com.google.android.material.tabs.TabLayout;
-import com.google.common.base.Strings;
 
-public class SearchActivity extends AppCompatActivity
+public class SearchActivity extends BaseActivityWithTheme
         implements SearchResultFragment.OnItemSelectedListener, SearchSuggestionsFragment.OnItemSelectedListener,
         OnMyBeerItemInteractionListener {
 

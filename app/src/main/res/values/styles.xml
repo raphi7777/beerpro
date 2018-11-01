@@ -10,8 +10,26 @@
         <item name="android:windowActivityTransitions">true</item>
 
         <!-- specify shared element transitions -->
-        <item name="android:windowSharedElementEnterTransition">@transition/change_view_transform</item>
-        <item name="android:windowSharedElementExitTransition">@transition/change_view_transform</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/change_view_transform
+        </item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_view_transform
+        </item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_dark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_dark</item>
+        <item name="colorAccent">@color/colorAccent_dark</item>
+        <item name="android:windowBackground">@color/windowBackgroundColor_dark</item>
+
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">@transition/change_view_transform
+        </item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_view_transform
+        </item>
     </style>
 
 
@@ -39,6 +57,10 @@
         <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 
+    <style name="LoginScreenTheme.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">@color/colorPrimary_dark</item>
+    </style>
+
     <style name="FirebaseUI.AuthMethodPicker.Logo">
         <item name="android:layout_width">160dp</item>
         <item name="android:layout_height">160dp</item>
@@ -52,6 +74,11 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.AppBarOverlay_dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/colorPrimary_dark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_dark</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

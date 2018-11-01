@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -14,9 +13,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
+import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.DetailsActivity;
 
-public class MyBeersActivity extends AppCompatActivity implements OnMyBeerItemInteractionListener {
+public class MyBeersActivity extends BaseActivityWithTheme implements OnMyBeerItemInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -31,7 +31,6 @@ public class MyBeersActivity extends AppCompatActivity implements OnMyBeerItemIn
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.title_activity_mybeers));
-
         model = ViewModelProviders.of(this).get(MyBeersViewModel.class);
     }
 

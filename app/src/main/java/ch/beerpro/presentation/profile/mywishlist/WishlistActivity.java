@@ -7,7 +7,7 @@ import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +17,11 @@ import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Wish;
+import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.DetailsActivity;
 import lombok.val;
 
-import java.util.List;
-
-public class WishlistActivity extends AppCompatActivity implements OnWishlistItemInteractionListener {
+public class WishlistActivity extends BaseActivityWithTheme implements OnWishlistItemInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

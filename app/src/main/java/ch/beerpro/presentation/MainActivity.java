@@ -7,9 +7,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -22,17 +28,9 @@ import ch.beerpro.presentation.explore.BeerManufacturersFragment;
 import ch.beerpro.presentation.explore.ExploreFragment;
 import ch.beerpro.presentation.profile.ProfileFragment;
 import ch.beerpro.presentation.ratings.RatingsFragment;
+import ch.beerpro.presentation.settings.ThemePreferencesActivity;
 import ch.beerpro.presentation.splash.SplashScreenActivity;
 import ch.beerpro.presentation.utils.ViewPagerAdapter;
-
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 /**
  * The {@link MainActivity} is the entry point for logged-in users (actually, users start at the
@@ -40,7 +38,7 @@ import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
  * <p>
  * The Activity has three tabs, each of which implemented by a fragment and held together by a {@link ViewPager}.
  */
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivityWithTheme
         implements BeerCategoriesFragment.OnItemSelectedListener, BeerManufacturersFragment.OnItemSelectedListener {
 
     /**
@@ -150,6 +148,10 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.action_logout:
                 logout();
+                return true;
+            case R.id.action_settings:
+                Intent i = new Intent(this, ThemePreferencesActivity.class);
+                startActivityForResult(i, 0);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

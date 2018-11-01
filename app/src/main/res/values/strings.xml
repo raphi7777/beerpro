@@ -108,4 +108,10 @@
     <string name="value_manufacturer">manufacturer</string>
     <string name="title_activity_beer">name</string>
     <string name="type_of_activity_beer">type</string>
+    <string name="change_theme">Theme ändern</string>
+    <string name="choose_theme">Theme-Auswahl</string>
+    <string name="choose_theme_summary">Wähle ein Theme aus, um die App nach deinem Belieben zu gestalten.</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="title_activity_base_with_theme">BaseActivityWithTheme</string>
 </resources>

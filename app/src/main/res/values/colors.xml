@@ -5,4 +5,9 @@
     <color name="colorPrimaryDark">#c6a700</color>
     <color name="windowBackgroundColor">#fffde7</color>
     <color name="colorAccent">#5d4037</color>
+    <color name="colorPrimary_dark">#db1304</color>
+    <color name="colorPrimaryLight_dark">#f23729</color>
+    <color name="colorPrimaryDark_dark">#840a01</color>
+    <color name="windowBackgroundColor_dark">#fffde7</color>
+    <color name="colorAccent_dark">#5d4037</color>
 </resources>

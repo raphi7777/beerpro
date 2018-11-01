@@ -1,6 +1,13 @@
 package ch.beerpro.presentation.explore;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
+import java.util.List;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,20 +16,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
+import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.DetailsActivity;
 import lombok.val;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toolbar;
-
-import java.util.List;
-
-public class BeerActivity extends AppCompatActivity implements OnBeerlistItemInteractionListener {
+public class BeerActivity extends BaseActivityWithTheme implements OnBeerlistItemInteractionListener {
 
     @BindView(R.id.toolbar)
     androidx.appcompat.widget.Toolbar toolbar;

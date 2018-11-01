@@ -7,8 +7,7 @@ import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import org.apache.commons.lang3.NotImplementedException;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.List;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,11 +17,11 @@ import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.FridgeItem;
+import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.DetailsActivity;
 import lombok.val;
-import java.util.List;
 
-public class MyFridgeActivity extends AppCompatActivity implements OnMyFridgeItemInteractionListener {
+public class MyFridgeActivity extends BaseActivityWithTheme implements OnMyFridgeItemInteractionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

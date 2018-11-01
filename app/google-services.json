@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "57597866876-8hfk20s1qhsulb2jl8l5opcuju2udd71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.beerpro",
+            "certificate_hash": "957dfeeb9778eb9cbd712f5d205c49ae32c95eca"
+          }
+        },
+        {
           "client_id": "57597866876-9bepr0276rggavb2jbo6q8g680o27ure.apps.googleusercontent.com",
           "client_type": 3
         }

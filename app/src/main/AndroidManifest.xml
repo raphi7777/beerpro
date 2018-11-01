@@ -26,13 +26,17 @@
         <activity
             android:name=".presentation.MainActivity"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="beerpro.page.link/beershare" android:scheme="http"/>
-                <data android:host="beerpro.page.link/beershare" android:scheme="https"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="beerpro.page.link/beershare"
+                    android:scheme="http" />
+                <data
+                    android:host="beerpro.page.link/beershare"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity android:name=".presentation.explore.search.SearchActivity" />
@@ -84,8 +88,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
         </activity>
-        <activity android:name=".presentation.explore.BeerActivity"></activity>
-        <activity android:name=".presentation.profile.myfridge.MyFridgeActivity"></activity>
+        <activity android:name=".presentation.explore.BeerActivity" />
+        <activity android:name=".presentation.profile.myfridge.MyFridgeActivity" />
+        <activity android:name=".presentation.settings.ThemePreferencesActivity" />
+        <activity
+            android:name=".presentation.BaseActivityWithTheme"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
