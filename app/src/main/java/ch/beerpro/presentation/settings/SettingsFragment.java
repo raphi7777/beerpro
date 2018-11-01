@@ -1,4 +1,4 @@
-package ch.beerpro.presentation.utils;
+package ch.beerpro.presentation.settings;
 
 
 import android.content.SharedPreferences;
