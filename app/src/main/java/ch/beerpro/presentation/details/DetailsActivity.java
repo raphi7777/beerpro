@@ -1,8 +1,10 @@
 package ch.beerpro.presentation.details;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
@@ -34,6 +37,7 @@ import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
+import ch.beerpro.presentation.utils.BackgroundImageProvider;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 
@@ -76,6 +80,9 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.beerHeader)
+    ImageView beerHeader;
 
     private RatingsRecyclerViewAdapter adapter;
 
@@ -129,6 +136,12 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
         dialog.show();
     }
 
+    public void feedback(View v) {
+        model.addBeerToFridge(v);
+        Toast.makeText(getBaseContext(), "Wurde hinzugefügt",
+                Toast.LENGTH_LONG).show();
+    }
+
     @OnClick(R.id.button2)
     public void shareApp() {
         String beerId = model.getBeer().getValue().getId();
@@ -154,12 +167,6 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
         startActivity(Intent.createChooser(sendIntent, "Share app via"));
     }
 
-    public void feedback(View v) {
-        model.addBeerToFridge(v);
-        Toast.makeText(getBaseContext(), "Wurde hinzugefügt",
-                Toast.LENGTH_LONG).show();
-    }
-
     private void updateBeer(Beer item) {
         name.setText(item.getName());
         manufacturer.setText(item.getManufacturer());
@@ -172,6 +179,14 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
         avgRating.setText(getResources().getString(R.string.fmt_avg_rating, item.getAvgRating()));
         numRatings.setText(getResources().getString(R.string.fmt_ratings, item.getNumRatings()));
         toolbar.setTitle(item.getName());
+
+        Task<byte[]> image  = BackgroundImageProvider.download( item.getManufacturer() + ".jpg");
+        image.addOnSuccessListener(dbimage -> {
+            Drawable drawable = BackgroundImageProvider.convertToDrawable(getResources(), dbimage);
+            beerHeader.setImageDrawable(drawable);
+        }).addOnFailureListener(x -> {
+            System.out.println(x.getCause());
+        });
     }
 
     private void updateRatings(List<Rating> ratings) {
