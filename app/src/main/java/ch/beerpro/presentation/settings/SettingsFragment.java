@@ -27,6 +27,14 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (getActivity() != null) {
             getActivity().recreate();
+            String selectedTheme = sharedPreferences.getString(key, "AppTheme");
+            if (selectedTheme.equals("AppTheme")) {
+                getActivity().getApplication().setTheme(R.style.AppTheme);
+            } else {
+                getActivity().getApplication().setTheme(R.style.AppTheme_Dark);
+
+            }
+
         }
     }
 

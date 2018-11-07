@@ -1,7 +1,9 @@
 package ch.beerpro.presentation.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -46,16 +48,18 @@ public class ToolbarScrollingBehaviour<V extends View> extends CoordinatorLayout
         Log.i(TAG, "Alpha: " + alpha);
 
         Resources resources = child.getResources();
-
-        int newToolbarColor = ColorUtils.setAlphaComponent(resources.getColor(R.color.colorPrimary),
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(coordinatorLayout.getContext());
+        String selectedTheme = sharedPrefs.getString("list_preference", "AppTheme");
+        boolean isDarkTheme = selectedTheme.equals("AppTheme.Dark");
+        int newToolbarColor = ColorUtils.setAlphaComponent(isDarkTheme ? resources.getColor(R.color.colorPrimary_dark) : resources.getColor(R.color.colorPrimary),
                 Math.max(Math.min((int) (255 * alpha), 255), 0));
         toolbarLayout.setBackgroundColor(newToolbarColor);
 
-        int newToolbarTextColor = ColorUtils.setAlphaComponent(resources.getColor(R.color.colorAccent),
+        int newToolbarTextColor = ColorUtils.setAlphaComponent(isDarkTheme ? resources.getColor(R.color.colorAccent_dark) : resources.getColor(R.color.colorAccent),
                 Math.max(Math.min((int) (255 * alpha), 255), 0));
         toolbar.setTitleTextColor(newToolbarTextColor);
 
-        int newStatusbarColor = ColorUtils.setAlphaComponent(resources.getColor(R.color.colorPrimaryDark),
+        int newStatusbarColor = ColorUtils.setAlphaComponent(isDarkTheme ? resources.getColor(R.color.colorPrimaryDark_dark) : resources.getColor(R.color.colorPrimaryDark),
                 Math.max(Math.min((int) (255 * alpha), 255), 0));
         statusBar.setBackgroundColor(newStatusbarColor);
 

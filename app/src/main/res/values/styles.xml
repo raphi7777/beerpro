@@ -41,6 +41,14 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="DetailsPageTheme.Dark" parent="AppTheme.Dark">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="AppTheme">
         <item name="android:textColor">@android:color/transparent</item>
         <item name="android:textSize">0sp</item>
@@ -74,11 +82,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.AppBarOverlay_dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="colorPrimary">@color/colorPrimary_dark</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_dark</item>
-    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
