@@ -1,9 +1,19 @@
 package ch.beerpro.presentation.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import ch.beerpro.R;
 
+import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 
 public class BackgroundImageProvider {
@@ -16,6 +26,26 @@ public class BackgroundImageProvider {
 
     static {
         Arrays.sort(backgrounds);
+    }
+
+    public static Task<byte[]> download(String imagename) {
+        try {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference gsReference = storage.getReferenceFromUrl("gs://beerpro-3c6a5.appspot.com/" + imagename);
+            final long FIVE_MEGABYTE = 5 * 1024 * 1024;
+            return gsReference.getBytes(FIVE_MEGABYTE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static Drawable convertToDrawable(Resources resources, byte[] image) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        Drawable drawable = new BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, 400, 250, true));
+
+        return drawable;
     }
 
     public static Drawable getBackgroundImage(Context res, int position) {

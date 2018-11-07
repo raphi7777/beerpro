@@ -27,14 +27,13 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/beerHeader"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/bg_bottles" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="120dp"

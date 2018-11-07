@@ -1,16 +1,23 @@
 package ch.beerpro.presentation.explore;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.presentation.utils.BackgroundImageProvider;
 import ch.beerpro.presentation.utils.StringDiffItemCallback;
@@ -58,10 +65,24 @@ public class BeerManufacturersRecyclerViewAdapter
         void bind(String item, int position, BeerManufacturersFragment.OnItemSelectedListener listener) {
             content.setText(item);
             Context resources = itemView.getContext();
-            imageView.setImageDrawable(BackgroundImageProvider.getBackgroundImage(resources, position + 10));
+            Task<byte[]> image  = BackgroundImageProvider.download( item + ".jpg");
+            image.addOnSuccessListener(dbimage -> {
+                Drawable drawable = BackgroundImageProvider.convertToDrawable(resources.getResources(), dbimage);
+                imageView.setImageDrawable(drawable);
+
+            });
             if (listener != null) {
                 itemView.setOnClickListener(v -> listener.onBeerManufacturerSelected(item));
             }
+
+
+//            StorageReference storageReference = FirebaseStorage.getInstance().getReference("backgroundImages/peach.jpg");
+//            imageView.setImageDrawable(BackgroundImageProvider.getBackgroundImage(resources, position + 10));
+//            GlideApp.with(resources)
+//                    .load(storageReference)
+//                    .into(imageView);
+
+
         }
     }
 }
