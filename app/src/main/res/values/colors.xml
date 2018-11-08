@@ -5,13 +5,12 @@
     <color name="colorPrimaryDark">#c6a700</color>
     <color name="windowBackgroundColor">#fffde7</color>
     <color name="colorAccent">#5d4037</color>
+    <color name="textColor">#5d4037</color>
+
     <color name="colorPrimary_dark">#212121</color>
-    <color name="colorPrimary_dark_old">#db1304</color>
     <color name="colorPrimaryLight_dark">#303030</color>
-    <color name="colorPrimaryLight_dark_old">#f23729</color>
     <color name="colorPrimaryDark_dark">#000000</color>
-    <color name="colorPrimaryDark_dark_old">#840a01</color>
     <color name="windowBackgroundColor_dark">#303030</color>
-    <color name="colorAccent_dark">#673ab7</color>
-    <color name="colorAccent_dark_old">#5d4037</color>
+    <color name="colorAccent_dark">#3e50b4</color>
+    <color name="textColor_dark">#3e50b4</color>
 </resources>

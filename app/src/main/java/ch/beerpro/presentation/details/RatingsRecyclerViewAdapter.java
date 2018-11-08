@@ -1,25 +1,24 @@
 package ch.beerpro.presentation.details;
 
-import ch.beerpro.GlideApp;
-import ch.beerpro.R;
-import ch.beerpro.domain.models.Rating;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseUser;
+import java.text.DateFormat;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ch.beerpro.GlideApp;
+import ch.beerpro.R;
+import ch.beerpro.domain.models.Rating;
 import ch.beerpro.presentation.utils.EntityDiffItemCallback;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.text.DateFormat;
+import ch.beerpro.presentation.utils.ThemeHelper;
 
 
 public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyclerViewAdapter.ViewHolder> {
@@ -101,7 +100,7 @@ public class RatingsRecyclerViewAdapter extends ListAdapter<Rating, RatingsRecyc
 
             numLikes.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getLikes().size()));
             if (item.getLikes().containsKey(user.getUid())) {
-                like.setColorFilter(itemView.getResources().getColor(R.color.colorPrimary));
+                like.setColorFilter(itemView.getResources().getColor(ThemeHelper.isDarkTheme(itemView.getContext()) ? R.color.colorPrimary_dark : R.color.colorPrimary));
             } else {
                 like.setColorFilter(itemView.getResources().getColor(android.R.color.darker_gray));
             }

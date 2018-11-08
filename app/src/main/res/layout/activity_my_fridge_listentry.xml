@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_bookmark_brown_24dp"
-                android:drawableTint="@color/colorPrimary"
+                android:drawableTint="?attr/colorPrimary"
                 android:text="speichern"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="10sp"

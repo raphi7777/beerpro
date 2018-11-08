@@ -138,12 +138,12 @@ public class CreateRatingActivity extends BaseActivityWithTheme {
                 UCrop.Options options = new UCrop.Options() {
                     {
                         setToolbarTitle("Foto zuschneiden");
-                        setToolbarColor(getResources().getColor(R.color.colorPrimary));
-                        setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-                        setActiveWidgetColor(getResources().getColor(R.color.colorAccent));
-                        setCropFrameColor(getResources().getColor(R.color.colorAccent));
-                        setCropGridColor(getResources().getColor(R.color.colorAccent));
-                        setDimmedLayerColor(getResources().getColor(R.color.windowBackgroundColor));
+                        setToolbarColor(getResources().getColor(getColorPrimary()));
+                        setStatusBarColor(getResources().getColor(getColorPrimaryDark()));
+                        setActiveWidgetColor(getResources().getColor(getColorAccent()));
+                        setCropFrameColor(getResources().getColor(getColorAccent()));
+                        setCropGridColor(getResources().getColor(getColorAccent()));
+                        setDimmedLayerColor(getResources().getColor(getWindowBackgroundColor()));
                         setHideBottomControls(true);
                     }
                 };

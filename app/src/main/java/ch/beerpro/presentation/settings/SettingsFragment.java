@@ -32,7 +32,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 getActivity().getApplication().setTheme(R.style.AppTheme);
             } else {
                 getActivity().getApplication().setTheme(R.style.AppTheme_Dark);
-
             }
 
         }

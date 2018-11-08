@@ -1,7 +1,6 @@
 package ch.beerpro.presentation.details;
 
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -211,7 +210,7 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
 
     private void toggleWishlistView(Wish wish) {
         if (wish != null) {
-            int color = getResources().getColor(R.color.colorPrimary);
+            int color = getResources().getColor(getColorPrimary());
             setDrawableTint(wishlist, color);
             wishlist.setChecked(true);
         } else {

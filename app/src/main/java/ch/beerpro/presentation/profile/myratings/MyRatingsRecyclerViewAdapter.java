@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseUser;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -16,16 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.beerpro.GlideApp;
 import ch.beerpro.R;
-import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
-import ch.beerpro.domain.models.*;
+import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
+import ch.beerpro.presentation.utils.ThemeHelper;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 
@@ -130,7 +128,7 @@ public class MyRatingsRecyclerViewAdapter
             like.setVisibility(View.GONE);
 
             if (wish != null) {
-                int color = itemView.getResources().getColor(R.color.colorPrimary);
+                int color = itemView.getResources().getColor(ThemeHelper.isDarkTheme(itemView.getContext()) ? R.color.colorPrimary_dark : R.color.colorPrimary);
                 setDrawableTint(wishlist, color);
             } else {
                 int color = itemView.getResources().getColor(android.R.color.darker_gray);

@@ -1,26 +1,18 @@
 package ch.beerpro.presentation;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import ch.beerpro.R;
+import ch.beerpro.presentation.utils.ThemeHelper;
 
 
 public class BaseActivityWithTheme extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String selectedTheme = sharedPrefs.getString("list_preference", "AppTheme");
-        if (selectedTheme.equals("AppTheme")) {
-            setTheme(getLightThemeId());
-        } else {
-            //it's dark theme
-            setTheme(getDarkThemeId());
-        }
+        setTheme(ThemeHelper.isDarkTheme(getBaseContext()) ? getDarkThemeId() : getLightThemeId());
         super.onCreate(savedInstanceState);
     }
 
@@ -38,6 +30,22 @@ public class BaseActivityWithTheme extends AppCompatActivity {
 
     protected int getDarkThemeId() {
         return R.style.AppTheme_Dark;
+    }
+
+    protected int getColorPrimary() {
+        return ThemeHelper.isDarkTheme(getBaseContext()) ? R.color.colorPrimary_dark : R.color.colorPrimary;
+    }
+
+    protected int getColorPrimaryDark() {
+        return ThemeHelper.isDarkTheme(getBaseContext()) ? R.color.colorPrimaryDark_dark : R.color.colorPrimaryDark;
+    }
+
+    protected int getColorAccent() {
+        return ThemeHelper.isDarkTheme(getBaseContext()) ? R.color.colorAccent_dark : R.color.colorAccent;
+    }
+
+    protected int getWindowBackgroundColor() {
+        return ThemeHelper.isDarkTheme(getBaseContext()) ? R.color.windowBackgroundColor_dark : R.color.windowBackgroundColor;
     }
 
 }
