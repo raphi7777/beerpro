@@ -1,12 +1,16 @@
 package ch.beerpro.presentation.profile.mywishlist;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.util.List;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -55,6 +59,8 @@ public class WishlistActivity extends BaseActivityWithTheme implements OnWishlis
 
         recyclerView.setAdapter(adapter);
 
+
+
     }
 
     private void updateWishlist(List<Pair<Wish, Beer>> entries) {
@@ -91,5 +97,15 @@ public class WishlistActivity extends BaseActivityWithTheme implements OnWishlis
     @Override
     public void onWishClickedListener(Beer beer) {
         model.toggleItemInWishlist(beer.getId());
+    }
+
+    @Override
+    public WishlistViewModel getModel() {
+        return model;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

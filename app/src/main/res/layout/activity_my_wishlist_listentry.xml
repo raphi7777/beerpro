@@ -17,7 +17,25 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="63dp"
+            tools:layout_editor_absoluteY="144dp">
+
+            <Button
+                android:id="@+id/addToFridgeOnWishlist"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="106dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_refrigerator"
+                android:drawableTint="@android:color/darker_gray"
+                android:text="Kühlschrank"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/removeFromWishlist"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:layout_width="0dp"

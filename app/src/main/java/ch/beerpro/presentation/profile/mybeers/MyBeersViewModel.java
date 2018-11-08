@@ -78,4 +78,9 @@ public class MyBeersViewModel extends ViewModel implements CurrentUser {
     public void setSearchTerm(String searchTerm) {
         this.searchTerm.setValue(searchTerm);
     }
+
+    public void addBeerToFridge(Beer beer) {
+        FridgeRepository fridgeRepository = new FridgeRepository();
+        fridgeRepository.addOrIncrementBeer(beer, getCurrentUser().getUid());
+    }
 }

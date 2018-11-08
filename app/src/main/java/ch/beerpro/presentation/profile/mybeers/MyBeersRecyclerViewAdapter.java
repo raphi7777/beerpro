@@ -1,5 +1,6 @@
 package ch.beerpro.presentation.profile.mybeers;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseUser;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -21,9 +23,9 @@ import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.MyBeer;
-import ch.beerpro.domain.models.MyBeerFromFridge;
 import ch.beerpro.domain.models.MyBeerFromRating;
 import ch.beerpro.domain.models.MyBeerFromWishlist;
+import ch.beerpro.domain.models.MyBeerFromFridge;
 import ch.beerpro.presentation.utils.DrawableHelpers;
 import ch.beerpro.presentation.utils.ThemeHelper;
 
@@ -96,6 +98,9 @@ public class MyBeersRecyclerViewAdapter extends ListAdapter<MyBeer, MyBeersRecyc
         @BindView(R.id.removeFromWishlist)
         Button removeFromWishlist;
 
+        @BindView(R.id.addToFridgeOnBeers)
+        Button addToFridge;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);
@@ -116,13 +121,24 @@ public class MyBeersRecyclerViewAdapter extends ListAdapter<MyBeer, MyBeersRecyc
             numRatings.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getNumRatings()));
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
             removeFromWishlist.setOnClickListener(v -> listener.onWishClickedListener(item));
+            addToFridge.setOnClickListener((view) -> {
+                listener.getModel().addBeerToFridge(item);
+                Toast toast = Toast.makeText(listener.getContext(), "Bier wurde zum Kühlschrank hinzugefügt",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            });
 
             Locale locale = new Locale("de", "CH");
-            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y, HH:mm:ss", locale);
+            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y,\nHH:mm:ss", locale);
             String formattedDate = formatter.format(entry.getDate());
             addedAt.setText(formattedDate);
 
-            if (entry instanceof MyBeerFromWishlist) {
+            if (entry instanceof MyBeerFromFridge) {
+                DrawableHelpers
+                        .setDrawableTint(removeFromWishlist, itemView.getResources().getColor(ThemeHelper.isDarkTheme(itemView.getContext()) ? R.color.colorPrimary_dark : R.color.colorPrimary));
+                onTheListSince.setText("im Kühlschrank seit");
+            } else if (entry instanceof MyBeerFromWishlist) {
                 DrawableHelpers
                         .setDrawableTint(removeFromWishlist, itemView.getResources().getColor(ThemeHelper.isDarkTheme(itemView.getContext()) ? R.color.colorPrimary_dark : R.color.colorPrimary));
                 onTheListSince.setText("auf der Wunschliste seit");
@@ -131,10 +147,6 @@ public class MyBeersRecyclerViewAdapter extends ListAdapter<MyBeer, MyBeersRecyc
                         itemView.getResources().getColor(android.R.color.darker_gray));
                 removeFromWishlist.setText("Wunschliste");
                 onTheListSince.setText("beurteilt am");
-            } else if (entry instanceof MyBeerFromFridge) {
-                DrawableHelpers
-                        .setDrawableTint(removeFromWishlist, itemView.getResources().getColor(ThemeHelper.isDarkTheme(itemView.getContext()) ? R.color.colorPrimary_dark : R.color.colorPrimary));
-                onTheListSince.setText("im Kühlschrank seit");
             }
         }
     }

@@ -1,6 +1,7 @@
 package ch.beerpro.presentation.profile.mywishlist;
 
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -19,6 +22,7 @@ import ch.beerpro.R;
 import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Wish;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -80,6 +84,9 @@ public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, W
         @BindView(R.id.removeFromWishlist)
         Button remove;
 
+        @BindView(R.id.addToFridgeOnWishlist)
+        Button addToFridge;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);
@@ -98,10 +105,20 @@ public class WishlistRecyclerViewAdapter extends ListAdapter<Pair<Wish, Beer>, W
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
 
             Locale locale = new Locale("de", "CH");
-            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y, HH:mm:ss", locale);
+            SimpleDateFormat formatter = new SimpleDateFormat("EE d. MMMM y,\nHH:mm:ss", locale);
             String formattedDate = formatter.format(wish.getAddedAt());
             addedAt.setText(formattedDate);
             remove.setOnClickListener(v -> listener.onWishClickedListener(item));
+
+            addToFridge.setOnClickListener((view) -> {
+                listener.getModel().addBeerToFridge(item);
+                Toast toast = Toast.makeText(listener.getContext(), "Bier wurde zum Kühlschrank hinzugefügt",
+                        Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+            });
+
+
         }
 
     }

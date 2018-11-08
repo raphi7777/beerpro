@@ -63,7 +63,7 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
         return wishlistRepository.toggleUserWishlistItem(getCurrentUser().getUid(), itemId);
     }
 
-    public void addBeerToFridge(View v) {
+    public void addBeerToFridge() {
         fridgeRepository.addOrIncrementBeer(beer.getValue(), getCurrentUser().getUid());
     }
 }
