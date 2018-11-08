@@ -1,6 +1,7 @@
 package ch.beerpro.presentation.profile.myfridge;
 
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.SimpleDateFormat;
@@ -95,6 +98,10 @@ public class MyFridgeRecyclerViewAdapter extends ListAdapter<Pair<FridgeItem, Be
             save.setOnClickListener(v -> {
                 fridgeItem.setAmount(amount.getText().toString());
                 listener.onSaveClickedListener(fridgeItem);
+                Toast toast = Toast.makeText(itemView.getContext(), "Menge wurde aktualisiert",
+                        Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
             });
         }
     }

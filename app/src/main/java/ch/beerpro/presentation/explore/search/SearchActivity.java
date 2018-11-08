@@ -108,4 +108,14 @@ public class SearchActivity extends BaseActivityWithTheme
     public void onWishClickedListener(Beer item) {
         searchViewModel.toggleItemInWishlist(item.getId());
     }
+
+    @Override
+    public MyBeersViewModel getModel() {
+        return myBeersViewModel;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
 }

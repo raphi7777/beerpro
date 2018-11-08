@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -137,9 +138,10 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
     }
 
     public void feedback(View v) {
-        model.addBeerToFridge(v);
-        Toast.makeText(getBaseContext(), "Wurde hinzugefügt",
-                Toast.LENGTH_LONG).show();
+        model.addBeerToFridge();
+        Toast toast = Toast.makeText(getBaseContext(), "Bier wurde zum Kühlschrank hinzugefügt",
+                Toast.LENGTH_SHORT);
+                toast.show();
     }
 
     @OnClick(R.id.button2)

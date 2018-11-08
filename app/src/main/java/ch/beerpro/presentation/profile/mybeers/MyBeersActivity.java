@@ -1,6 +1,7 @@
 package ch.beerpro.presentation.profile.mybeers;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.presentation.BaseActivityWithTheme;
 import ch.beerpro.presentation.details.DetailsActivity;
+import ch.beerpro.presentation.profile.mywishlist.WishlistViewModel;
 
 public class MyBeersActivity extends BaseActivityWithTheme implements OnMyBeerItemInteractionListener {
 
@@ -83,5 +85,15 @@ public class MyBeersActivity extends BaseActivityWithTheme implements OnMyBeerIt
     @Override
     public void onWishClickedListener(Beer item) {
         model.toggleItemInWishlist(item.getId());
+    }
+
+    @Override
+    public MyBeersViewModel getModel() {
+        return model;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }
