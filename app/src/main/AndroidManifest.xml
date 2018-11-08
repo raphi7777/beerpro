@@ -93,7 +93,7 @@
         <activity android:name=".presentation.settings.ThemePreferencesActivity" />
         <activity
             android:name=".presentation.BaseActivityWithTheme"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

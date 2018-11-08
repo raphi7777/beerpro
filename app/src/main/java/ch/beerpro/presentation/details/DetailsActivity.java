@@ -233,4 +233,14 @@ public class DetailsActivity extends BaseActivityWithTheme implements OnRatingLi
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected int getLightThemeId() {
+        return R.style.DetailsPageTheme;
+    }
+
+    @Override
+    protected int getDarkThemeId() {
+        return R.style.DetailsPageTheme_Dark;
+    }
 }
